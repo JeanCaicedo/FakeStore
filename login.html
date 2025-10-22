@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FakeStore - Iniciar Sesión</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo" onclick="window.location.href='index.html'" style="cursor: pointer;">
+            <img src="Imagenes/IconoTienda.png" alt="FakeStore" style="width: 30px; height: 30px;">
+            <span>FakeStore</span>
+        </div>
+        <nav class="nav">
+        </nav>
+        <div class="header-right">
+            <div class="cart-icon">🛒</div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="form-container">
+            <div class="form-card">
+                <h2 class="form-title">Crear una cuenta</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" id="email" placeholder="Ingresa tu correo electrónico" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Nombre de Usuario</label>
+                        <input type="text" id="username" placeholder="Elige un nombre de usuario" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Contraseña</label>
+                        <input type="password" id="password" placeholder="Crea una contraseña" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fullname">Nombre Completo</label>
+                        <input type="text" id="fullname" placeholder="Tu nombre completo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Dirección</label>
+                        <input type="text" id="address" placeholder="Tu dirección" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Número de Teléfono</label>
+                        <input type="tel" id="phone" placeholder="Tu número de teléfono" required>
+                    </div>
+                    <button type="submit" class="btn">Registrarse</button>
+                </form>
+            </div>
+
+            <div class="form-card">
+                <h2 class="form-title">Iniciar Sesión</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="login-username">Nombre de Usuario</label>
+                        <input type="text" id="login-username" placeholder="Ingresa tu nombre de usuario" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Contraseña</label>
+                        <input type="password" id="login-password" placeholder="Ingresa tu contraseña" required>
+                    </div>
+                    <div class="forgot-password">
+                        <a href="#forgot">¿Olvidaste tu contraseña?</a>
+                    </div>
+                    <button type="submit" class="btn">Iniciar Sesión</button>
+                    <div class="register-link">
+                        <span>¿No tienes una cuenta? </span>
+                        <a href="#register">Regístrate</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+            <a href="dashboard.html" style="display: inline-block; background-color: #007bff; color: white; padding: 0.75rem 1.5rem; text-decoration: none; border-radius: 5px; font-weight: bold;">
+                🏪 Acceder al Dashboard Administrativo
+            </a>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const registerForm = document.querySelector('.form-card:first-child form');
+            registerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Registro exitoso! Redirigiendo...');
+                window.location.href = 'index.html';
+            });
+
+            const loginForm = document.querySelector('.form-card:last-child form');
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Inicio de sesión exitoso! Redirigiendo...');
+                window.location.href = 'index.html';
+            });
+
+            const cartIcon = document.querySelector('.cart-icon');
+            cartIcon.addEventListener('click', function () {
+                window.location.href = 'carrito.html';
+            });
+        });
+    </script>
+</body>
+</html>
+

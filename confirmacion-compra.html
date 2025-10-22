@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FakeStore - Compra Realizada</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo" onclick="window.location.href='index.html'" style="cursor: pointer;">
+            <img src="Imagenes/IconoTienda.png" alt="FakeStore" style="width: 30px; height: 30px;">
+            <span>FakeStore</span>
+        </div>
+        <nav class="nav">
+        </nav>
+        <div class="header-right">
+            <div class="user-icon">👤</div>
+            <div class="cart-icon">🛒</div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="confirmation-container">
+            <div class="success-icon">✓</div>
+
+            <h1 class="confirmation-title">¡Pedido realizado con éxito!</h1>
+            <p class="confirmation-message">
+                Gracias por tu compra. Tu pedido está siendo procesado y recibirás un correo electrónico de confirmación
+                en breve.
+            </p>
+            <p class="order-id">ID del carrito: #987654321</p>
+
+            <div class="order-summary-card">
+                <h3 class="summary-title">Resumen del pedido</h3>
+
+                <div class="order-item">
+                    <div class="order-item-image">👕</div>
+                    <div class="order-item-info">
+                        <div class="order-item-name">Camiseta de Algodón Premium</div>
+                        <div class="order-item-quantity">Cantidad: 2</div>
+                    </div>
+                    <div class="order-item-price">COP $200,000</div>
+                </div>
+
+                <div class="order-item">
+                    <div class="order-item-image">👛</div>
+                    <div class="order-item-info">
+                        <div class="order-item-name">Cartera de Cuero</div>
+                        <div class="order-item-quantity">Cantidad: 1</div>
+                    </div>
+                    <div class="order-item-price">COP $800,000</div>
+                </div>
+
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #ddd;">
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span>COP $1,000,000</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Envío</span>
+                        <span>Gratis</span>
+                    </div>
+                    <div class="summary-row" style="font-weight: bold; font-size: 1.1rem;">
+                        <span>Total</span>
+                        <span>COP $1,000,000</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="continue-shopping" onclick="continuarComprando()">
+                Continuar Comprando →
+            </button>
+        </div>
+    </main>
+
+    <script>
+        function continuarComprando() {
+            alert('¡Gracias por tu compra! Redirigiendo al inicio...');
+            window.location.href = 'index.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const orderId = '#' + Math.floor(Math.random() * 1000000000);
+            document.querySelector('.order-id').textContent = `ID del carrito: ${orderId}`;
+
+            // Funcionalidad del icono de usuario/login
+            const userIcon = document.querySelector('.user-icon');
+            userIcon.addEventListener('click', function () {
+                window.location.href = 'login.html';
+            });
+
+            const cartIcon = document.querySelector('.header-right .cart-icon');
+            cartIcon.addEventListener('click', function () {
+                window.location.href = 'carrito.html';
+            });
+
+            setTimeout(() => {
+                const successIcon = document.querySelector('.success-icon');
+                successIcon.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    successIcon.style.transform = 'scale(1)';
+                }, 200);
+            }, 500);
+        });
+    </script>
+</body>
+
+</html>

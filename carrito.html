@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FakeStore - Carrito de Compras</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo" onclick="window.location.href='index.html'" style="cursor: pointer;">
+            <img src="Imagenes/IconoTienda.png" alt="FakeStore" style="width: 30px; height: 30px;">
+            <span>FakeStore</span>
+        </div>
+        <nav class="nav">
+
+        </nav>
+        <div class="header-right">
+            <div class="search-bar">
+                <input type="text" placeholder="Buscar productos...">
+            </div>
+            <div class="user-icon">👤</div>
+            <div class="cart-icon">🛒</div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="cart-container">
+            <h1 class="cart-title">Carrito de compras</h1>
+
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>PRODUCTO</th>
+                        <th>PRECIO</th>
+                        <th>CANTIDAD</th>
+                        <th>TOTAL</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="cart-item">
+                                <div class="cart-item-image">⌚</div>
+                                <span>Reloj Moderno</span>
+                            </div>
+                        </td>
+                        <td>$799.960</td>
+                        <td>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn" onclick="cambiarCantidad('producto1', -1)">-</button>
+                                <input type="number" class="quantity-input" value="2" min="1" id="cantidad-producto1">
+                                <button class="quantity-btn" onclick="cambiarCantidad('producto1', 1)">+</button>
+                            </div>
+                        </td>
+                        <td id="total-producto1">$1.599.920</td>
+                        <td>
+                            <button class="delete-btn" onclick="eliminarProducto('producto1')">🗑️</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="cart-item">
+                                <div class="cart-item-image">👛</div>
+                                <span>Billetera de Cuero</span>
+                            </div>
+                        </td>
+                        <td>$199.960</td>
+                        <td>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn" onclick="cambiarCantidad('producto2', -1)">-</button>
+                                <input type="number" class="quantity-input" value="1" min="1" id="cantidad-producto2">
+                                <button class="quantity-btn" onclick="cambiarCantidad('producto2', 1)">+</button>
+                            </div>
+                        </td>
+                        <td id="total-producto2">$199.960</td>
+                        <td>
+                            <button class="delete-btn" onclick="eliminarProducto('producto2')">🗑️</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="cart-item">
+                                <div class="cart-item-image">🕶️</div>
+                                <span>Gafas de Sol Clásicas</span>
+                            </div>
+                        </td>
+                        <td>$319.960</td>
+                        <td>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn" onclick="cambiarCantidad('producto3', -1)">-</button>
+                                <input type="number" class="quantity-input" value="3" min="1" id="cantidad-producto3">
+                                <button class="quantity-btn" onclick="cambiarCantidad('producto3', 1)">+</button>
+                            </div>
+                        </td>
+                        <td id="total-producto3">$959.880</td>
+                        <td>
+                            <button class="delete-btn" onclick="eliminarProducto('producto3')">🗑️</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="display: flex; justify-content: flex-end;">
+                <div class="order-summary">
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">$2.759.760</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Envío:</span>
+                        <span id="envio">$40.000</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Impuestos (8%):</span>
+                        <span id="impuestos">$220.780</span>
+                    </div>
+                    <div class="summary-row summary-total">
+                        <span>Total:</span>
+                        <span id="total-final">$3.020.540</span>
+                    </div>
+                    <button class="btn-checkout" onclick="procederAlPago()">
+                        Proceder al pago
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const precios = {
+            producto1: 799960,
+            producto2: 199960,
+            producto3: 319960
+        };
+
+        function cambiarCantidad(productoId, cambio) {
+            const input = document.getElementById(`cantidad-${productoId}`);
+            const nuevaCantidad = parseInt(input.value) + cambio;
+
+            if (nuevaCantidad >= 1) {
+                input.value = nuevaCantidad;
+                actualizarTotalProducto(productoId);
+                actualizarResumen();
+            }
+        }
+
+        function actualizarTotalProducto(productoId) {
+            const cantidad = parseInt(document.getElementById(`cantidad-${productoId}`).value);
+            const precio = precios[productoId];
+            const total = cantidad * precio;
+
+            document.getElementById(`total-${productoId}`).textContent =
+                '$' + total.toLocaleString();
+        }
+
+        function eliminarProducto(productoId) {
+            if (confirm('¿Estás seguro de que quieres eliminar este producto?')) {
+                const fila = document.getElementById(`cantidad-${productoId}`).closest('tr');
+                fila.remove();
+                actualizarResumen();
+            }
+        }
+
+        function actualizarResumen() {
+            // Calcular subtotal
+            let subtotal = 0;
+            document.querySelectorAll('[id^="total-producto"]').forEach(element => {
+                const totalTexto = element.textContent.replace('$', '').replace(/\./g, '');
+                subtotal += parseInt(totalTexto);
+            });
+
+            // Calcular envío
+            const envio = 40000;
+
+            // Calcular impuestos (8%)
+            const impuestos = Math.round(subtotal * 0.08);
+
+            // Calcular total final
+            const totalFinal = subtotal + envio + impuestos;
+
+            // Actualizar la interfaz
+            document.getElementById('subtotal').textContent = '$' + subtotal.toLocaleString();
+            document.getElementById('envio').textContent = '$' + envio.toLocaleString();
+            document.getElementById('impuestos').textContent = '$' + impuestos.toLocaleString();
+            document.getElementById('total-final').textContent = '$' + totalFinal.toLocaleString();
+        }
+
+        function procederAlPago() {
+            // Simular proceso de pago
+            alert('Redirigiendo al proceso de pago...');
+            window.location.href = 'confirmacion-compra.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            actualizarResumen();
+
+            const searchInput = document.querySelector('.search-bar input');
+            searchInput.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    console.log('Buscar:', this.value);
+                }
+            });
+
+            const userIcon = document.querySelector('.user-icon');
+            userIcon.addEventListener('click', function () {
+                window.location.href = 'login.html';
+            });
+
+            const cartIcon = document.querySelector('.header-right .cart-icon');
+            cartIcon.addEventListener('click', function () {
+            });
+        });
+    </script>
+</body>
+
+</html>

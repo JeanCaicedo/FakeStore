@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FakeStore - Dashboard Administrativo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="sidebar-logo" onclick="window.location.href='index.html'" style="cursor: pointer;">
+                <img src="Imagenes/IconoTienda.png" alt="FakeStore" style="width: 30px; height: 30px;">
+                <span>FakeStore</span>
+            </div>
+            
+            <nav>
+                <ul class="sidebar-nav">
+                    <li>
+                        <a href="#dashboard">
+                            <span>📊</span>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#productos" class="active">
+                            <span>📄</span>
+                            <span>Productos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#pedidos">
+                            <span>🛒</span>
+                            <span>Pedidos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#clientes">
+                            <span>👥</span>
+                            <span>Clientes</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div style="position: absolute; bottom: 2rem;">
+                <a href="#configuracion" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; color: white; text-decoration: none; border-radius: 5px;">
+                    <span>⚙️</span>
+                    <span>Configuración</span>
+                </a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <h1 class="dashboard-title">Gestión de Productos</h1>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h2 class="card-title">Añadir Nuevo Producto</h2>
+                    <form id="form-producto">
+                        <div class="form-group">
+                            <label for="titulo">Título</label>
+                            <input type="text" id="titulo" placeholder="ej. Sofá Moderno" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="precio">Precio (COP)</label>
+                            <input type="number" id="precio" placeholder="ej. 2.500.000" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="descripcion">Descripción</label>
+                            <textarea id="descripcion" placeholder="Breve descripción del producto"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="imagen-url">URL de la Imagen</label>
+                            <input type="url" id="imagen-url" placeholder="https://ejemplo.com/imagen.jpg">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="categoria">Categoría</label>
+                            <select id="categoria" required>
+                                <option value="">Seleccionar categoría</option>
+                                <option value="electronica">Electrónica</option>
+                                <option value="ropa">Ropa</option>
+                                <option value="hogar">Hogar</option>
+                                <option value="moda">Moda</option>
+                                <option value="accesorios">Accesorios</option>
+                                <option value="alimentos">Alimentos y Bebidas</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="btn">Añadir Producto</button>
+                    </form>
+                </div>
+
+                <div class="dashboard-card">
+                    <h2 class="card-title">Productos Existentes</h2>
+                    <table class="products-table">
+                        <thead>
+                            <tr>
+                                <th>PRODUCTO</th>
+                                <th>PRECIO (COP)</th>
+                                <th>CATEGORÍA</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="productos-lista">
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 1rem;">
+                                        <div class="product-thumbnail" style="background-color: #90EE90;">B</div>
+                                        <span>Bolso de Cuero Elegante</span>
+                                    </div>
+                                </td>
+                                <td>$480.000</td>
+                                <td><span class="category-badge">Moda</span></td>
+                                <td><button class="edit-btn" onclick="editarProducto('producto1')">✏️</button></td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 1rem;">
+                                        <div class="product-thumbnail" style="background-color: #228B22;">A</div>
+                                        <span>Auriculares Inalámbricos</span>
+                                    </div>
+                                </td>
+                                <td>$600.000</td>
+                                <td><span class="category-badge">Electrónica</span></td>
+                                <td><button class="edit-btn" onclick="editarProducto('producto2')">✏️</button></td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 1rem;">
+                                        <div class="product-thumbnail" style="background-color: #90EE90;">C</div>
+                                        <span>Camiseta de Algodón</span>
+                                    </div>
+                                </td>
+                                <td>$120.000</td>
+                                <td><span class="category-badge">Ropa</span></td>
+                                <td><button class="edit-btn" onclick="editarProducto('producto3')">✏️</button></td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 1rem;">
+                                        <div class="product-thumbnail" style="background-color: #90EE90;">B</div>
+                                        <span>Botella de Agua</span>
+                                    </div>
+                                </td>
+                                <td>$100.000</td>
+                                <td><span class="category-badge">Accesorios</span></td>
+                                <td><button class="edit-btn" onclick="editarProducto('producto4')">✏️</button></td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 1rem;">
+                                        <div class="product-thumbnail" style="background-color: #8B4513;">G</div>
+                                        <span>Café Gourmet</span>
+                                    </div>
+                                </td>
+                                <td>$72.000</td>
+                                <td><span class="category-badge">Alimentos y Bebidas</span></td>
+                                <td><button class="edit-btn" onclick="editarProducto('producto5')">✏️</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        let productos = [
+            {
+                id: 'producto1',
+                titulo: 'Bolso de Cuero Elegante',
+                precio: 480000,
+                categoria: 'Moda',
+                descripcion: 'Bolso de cuero de alta calidad',
+                imagen: 'B'
+            },
+            {
+                id: 'producto2',
+                titulo: 'Auriculares Inalámbricos',
+                precio: 600000,
+                categoria: 'Electrónica',
+                descripcion: 'Auriculares con cancelación de ruido',
+                imagen: 'A'
+            },
+            {
+                id: 'producto3',
+                titulo: 'Camiseta de Algodón',
+                precio: 120000,
+                categoria: 'Ropa',
+                descripcion: 'Camiseta 100% algodón',
+                imagen: 'C'
+            },
+            {
+                id: 'producto4',
+                titulo: 'Botella de Agua',
+                precio: 100000,
+                categoria: 'Accesorios',
+                descripcion: 'Botella reutilizable',
+                imagen: 'B'
+            },
+            {
+                id: 'producto5',
+                titulo: 'Café Gourmet',
+                precio: 72000,
+                categoria: 'Alimentos y Bebidas',
+                descripcion: 'Café de origen premium',
+                imagen: 'G'
+            }
+        ];
+
+        function añadirProducto(event) {
+            event.preventDefault();
+            
+            const titulo = document.getElementById('titulo').value;
+            const precio = parseInt(document.getElementById('precio').value);
+            const descripcion = document.getElementById('descripcion').value;
+            const imagenUrl = document.getElementById('imagen-url').value;
+            const categoria = document.getElementById('categoria').value;
+            
+            const nuevoProducto = {
+                id: 'producto' + (productos.length + 1),
+                titulo: titulo,
+                precio: precio,
+                categoria: categoria,
+                descripcion: descripcion,
+                imagen: '📦' // Imagen por defecto
+            };
+            
+            productos.push(nuevoProducto);
+            
+            actualizarTablaProductos();
+            
+            document.getElementById('form-producto').reset();
+            
+            alert('Producto añadido exitosamente!');
+        }
+
+        function actualizarTablaProductos() {
+            const tbody = document.getElementById('productos-lista');
+            tbody.innerHTML = '';
+            
+            productos.forEach(producto => {
+                const fila = document.createElement('tr');
+                fila.innerHTML = `
+                    <td>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div class="product-thumbnail" style="background-color: #90EE90;">${producto.imagen}</div>
+                            <span>${producto.titulo}</span>
+                        </div>
+                    </td>
+                    <td>$${producto.precio.toLocaleString()}</td>
+                    <td><span class="category-badge">${producto.categoria}</span></td>
+                    <td><button class="edit-btn" onclick="editarProducto('${producto.id}')">✏️</button></td>
+                `;
+                tbody.appendChild(fila);
+            });
+        }
+
+        function editarProducto(productoId) {
+            const producto = productos.find(p => p.id === productoId);
+            if (producto) {
+                document.getElementById('titulo').value = producto.titulo;
+                document.getElementById('precio').value = producto.precio;
+                document.getElementById('descripcion').value = producto.descripcion;
+                document.getElementById('categoria').value = producto.categoria.toLowerCase();
+                
+                alert(`Editando: ${producto.titulo}`);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('form-producto').addEventListener('submit', añadirProducto);
+            
+            const navLinks = document.querySelectorAll('.sidebar-nav a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    
+                    this.classList.add('active');
+                    
+                    console.log('Navegando a:', this.textContent.trim());
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+

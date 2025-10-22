@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FakeStore - Inicio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo" onclick="window.location.href='index.html'" style="cursor: pointer;">
+            <img src="Imagenes/IconoTienda.png" alt="FakeStore" style="width: 30px; height: 30px;">
+            <span>FakeStore</span>
+        </div>
+
+        <div class="header-right">
+            <div class="search-bar">
+                <input type="text" placeholder="Buscar productos...">
+            </div>
+            <div class="cart-badge">
+                <div class="cart-icon">🛒</div>
+            </div>
+            <div class="user-icon">👤</div>
+            <div class="dashboard-icon" title="Dashboard Administrativo">🏪</div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero-banner">
+            <img src="Imagenes/BannerTienda.jpg" alt="Banner FakeStore" class="hero-image">
+            <div class="hero-content">
+                <h1 class="hero-title">Bienvenido a FakeStore</h1>
+                <p class="hero-subtitle">Descubre nuestra última colección</p>
+            </div>
+        </section>
+
+        <section class="featured-products">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <h2 class="section-title">Productos Destacados</h2>
+                <div class="category-filters">
+                    <button class="filter-btn active">Todos</button>
+                    <button class="filter-btn">Electrónica</button>
+                    <button class="filter-btn">Ropa</button>
+                    <button class="filter-btn">Hogar</button>
+                    <button class="filter-btn">Ordenar por ↓</button>
+                </div>
+            </div>
+
+            <div class="products-grid">
+                <div class="product-card" onclick="window.location.href='producto-detalle.html'">
+                    <div class="product-image">⌚</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Reloj Inteligente</h3>
+                        <p class="product-price">$799.000 COP</p>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="window.location.href='producto-detalle.html'">
+                    <div class="product-image">👗</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Vestido de Verano</h3>
+                        <p class="product-price">$199.000 COP</p>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="window.location.href='producto-detalle.html'">
+                    <div class="product-image">☕</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Cafetera</h3>
+                        <p class="product-price">$319.000 COP</p>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="window.location.href='producto-detalle.html'">
+                    <div class="product-image">🛋️</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Sofá Moderno</h3>
+                        <p class="product-price">$1.999.000 COP</p>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="window.location.href='producto-detalle.html'">
+                    <div class="product-image">🎧</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Auriculares Inalámbricos</h3>
+                        <p class="product-price">$450.000 COP</p>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="window.location.href='producto-detalle.html'">
+                    <div class="product-image">👟</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Zapatos Deportivos</h3>
+                        <p class="product-price">$350.000 COP</p>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="window.location.href='producto-detalle.html'">
+                    <div class="product-image">📱</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Smartphone</h3>
+                        <p class="product-price">$1.200.000 COP</p>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="window.location.href='producto-detalle.html'">
+                    <div class="product-image">💻</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Laptop Gaming</h3>
+                        <p class="product-price">$2.500.000 COP</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    console.log('Filtrar por:', this.textContent);
+                });
+            });
+
+            const cartIcon = document.querySelector('.cart-icon');
+            cartIcon.addEventListener('click', function () {
+                window.location.href = 'carrito.html';
+            });
+
+            const userIcon = document.querySelector('.user-icon');
+            userIcon.addEventListener('click', function () {
+                window.location.href = 'login.html';
+            });
+
+            const dashboardIcon = document.querySelector('.dashboard-icon');
+            dashboardIcon.addEventListener('click', function () {
+                window.location.href = 'dashboard.html';
+            });
+
+            const searchInput = document.querySelector('.search-bar input');
+            searchInput.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    console.log('Buscar:', this.value);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
