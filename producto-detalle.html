@@ -17,11 +17,11 @@
         <nav class="nav">
         </nav>
         <div class="header-right">
-            <div class="search-bar">
-                <input type="text" placeholder="Buscar productos...">
+            <div class="cart-icon">🛒
+                <span class="cart-badge"></span>
             </div>
-            <div class="cart-icon">❤️</div>
-            <div class="cart-icon">🛒</div>
+            <div class="wishlist-icon" title="Mis Favoritos" style="cursor: pointer; font-size: 1.5rem;">❤️</div>
+            <div class="user-icon">👤</div>
         </div>
     </header>
 
@@ -31,102 +31,11 @@
         </div>
 
         <div class="product-detail">
-            <div class="product-image-large">
-                🏔️☀️
-            </div>
-
-            <div class="product-info-detail">
-                <h1 class="product-title">Auriculares Inalámbricos<br>SmartTech</h1>
-
-                <p class="product-description">
-                    Experimenta una calidad de sonido superior con estos auriculares inalámbricos con cancelación de
-                    ruido.
-                    Perfectos para amantes de la música y profesionales por igual.
-                </p>
-
-                <div class="rating">
-                    <div class="stars">
-                        <span class="star"></span>
-                        <span class="star"></span>
-                        <span class="star"></span>
-                        <span class="star"></span>
-                        <span class="star half"></span>
-                    </div>
-                    <span style="color: #666; font-size: 0.9rem;">4.5 (1,289 reseñas)</span>
-                </div>
-
-                <div class="price-large">$799.999 COP</div>
-
-                <div class="product-details">
-                    <h3 class="details-title">Detalles del Producto</h3>
-                    <div class="details-grid">
-                        <div class="detail-item">
-                            <span class="detail-label">Categoría</span>
-                            <span class="detail-value">Electrónicos</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Marca</span>
-                            <span class="detail-value">SmartTech</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Color</span>
-                            <span class="detail-value">Negro Obsidiana</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Conectividad</span>
-                            <span class="detail-value">Bluetooth 5.2, Jack 3.5mm</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="action-buttons">
-                    <button class="btn-add-cart" onclick="agregarAlCarrito()">
-                        🛒 Añadir al Carrito
-                    </button>
-                    <button class="btn-wishlist">
-                        ❤️
-                    </button>
-                </div>
-            </div>
+            <div class="loader">Cargando producto...</div>
         </div>
     </main>
 
-    <script>
-        function agregarAlCarrito() {
-            alert('Producto agregado al carrito!');
-
-            const cartBadge = document.querySelector('.cart-badge::after');
-            console.log('Producto agregado al carrito');
-
-            // window.location.href = 'carrito.html';
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const wishlistBtn = document.querySelector('.btn-wishlist');
-            wishlistBtn.addEventListener('click', function () {
-                this.style.backgroundColor = this.style.backgroundColor === 'red' ? '#f8f9fa' : 'red';
-                this.style.color = this.style.backgroundColor === 'red' ? 'white' : 'black';
-            });
-
-            const searchInput = document.querySelector('.search-bar input');
-            searchInput.addEventListener('keypress', function (e) {
-                if (e.key === 'Enter') {
-                    console.log('Buscar:', this.value);
-                }
-            });
-
-            const cartIcon = document.querySelector('.header-right .cart-icon:last-child');
-            cartIcon.addEventListener('click', function () {
-                window.location.href = 'carrito.html';
-            });
-
-            // Funcionalidad del icono de usuario/login
-            const userIcon = document.querySelector('.header-right .cart-icon:first-child');
-            userIcon.addEventListener('click', function () {
-                window.location.href = 'login.html';
-            });
-        });
-    </script>
+    <script type="module" src="js/product-detail.js"></script>
 </body>
 
 </html>
